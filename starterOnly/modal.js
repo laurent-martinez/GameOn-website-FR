@@ -95,20 +95,22 @@ inputs.forEach((input) => {
     }
   });
 });
-// validations
+// validations for all inputs
 
-function validate() {
+function validate(validator) {
   // check firstName
   if (firstName.length < 2 || firstName.trim() === "") {
     firstName = null;
   } else {
     firstName;
+    validator++;
   }
   //check lastName
   if (lastName.length < 2 || lastName === firstName || lastName.trim() === "") {
     lastName = null;
   } else {
     lastName;
+    validator++;
   }
   //check email
   if (
@@ -117,6 +119,7 @@ function validate() {
     email = null;
   } else {
     email;
+    validator++;
   }
   //check birthDate
   if (
@@ -127,12 +130,14 @@ function validate() {
     birthDate = null;
   } else {
     birthDate;
+    validator++;
   }
   //check quantity
   if (!quantity.match(/^[0-9]+$/)) {
     quantity = null;
   } else {
     quantity;
+    validator++;
   }
   //check location
   if (
@@ -156,17 +161,46 @@ function validate() {
     location4;
     location5;
     location6;
+    validator++;
   }
   //check cgv
   if (!cgv.checked) {
     cgv = null;
   } else {
     cgv;
+    validator++;
+  }
+  //check if every fields are ok
+  if (validator === 5) {
+    return true;
+  } else {
+    return false;
   }
 }
-validate();
-// final validation of form & saving data
 
-/*form.addEventListener("submit", (e) => {
-  e.preventDefault();
-});*/
+// final validation of form & saving data
+let dataSaving;
+form.addEventListener("submit", (e) => {
+  validate();
+  if (validate()) {
+    dataSaving = {
+      firstName,
+      lastName,
+      email,
+      birthDate,
+      quantity,
+      location1,
+      location2,
+      location3,
+      location4,
+      location5,
+      location6,
+      cgv,
+      newsletter,
+    };
+    form.innerHTML = `<h3>Merci pour votre inscription</h3> <button onclick='${closeModal()}'class='button'>Close</button>`;
+  } else {
+    e.preventDefault();
+  }
+  return dataSaving;
+});
