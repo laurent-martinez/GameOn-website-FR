@@ -22,7 +22,19 @@ const inputs = document.querySelectorAll(
   "input[type=text],input[type=email],input[type=date],input[type=number],input[type=radio],input[type=checkbox]"
 );
 // variable of inputs
-let firstName, lastName, email, birthDate, quantity, cities, cgv, newsletter;
+let firstName,
+  lastName,
+  email,
+  birthDate,
+  quantity,
+  location1,
+  location2,
+  location3,
+  location4,
+  location5,
+  location6,
+  cgv,
+  newsletter;
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // Launch modal ,form
@@ -85,10 +97,74 @@ inputs.forEach((input) => {
 });
 // validations
 
-/*function validate() {
-
-  }*/
-
+function validate() {
+  // check firstName
+  if (firstName.length < 2 || firstName.trim() === "") {
+    firstName = null;
+  } else {
+    firstName;
+  }
+  //check lastName
+  if (lastName.length < 2 || lastName === firstName || lastName.trim() === "") {
+    lastName = null;
+  } else {
+    lastName;
+  }
+  //check email
+  if (
+    !email.match(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/)
+  ) {
+    email = null;
+  } else {
+    email;
+  }
+  //check birthDate
+  if (
+    !birthDate.match(
+      /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/
+    )
+  ) {
+    birthDate = null;
+  } else {
+    birthDate;
+  }
+  //check quantity
+  if (!quantity.match(/^[0-9]+$/)) {
+    quantity = null;
+  } else {
+    quantity;
+  }
+  //check location
+  if (
+    !location1.checked ||
+    !location2.checked ||
+    !location3.checked ||
+    !location4.checked ||
+    !location5.checked ||
+    !location6.checked
+  ) {
+    location1 = null;
+    location2 = null;
+    location3 = null;
+    location4 = null;
+    location5 = null;
+    location6 = null;
+  } else {
+    location1;
+    location2;
+    location3;
+    location4;
+    location5;
+    location6;
+  }
+  //check cgv
+  if (!cgv.checked) {
+    cgv = null;
+  } else {
+    cgv;
+  }
+}
+validate();
 // final validation of form & saving data
 
 /*form.addEventListener("submit", (e) => {
