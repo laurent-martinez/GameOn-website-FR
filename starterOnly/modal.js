@@ -18,23 +18,9 @@ const modalbg = id("bground"),
   closer = id("close");
 
 // dom for all inputs
-const inputs = document.querySelectorAll(
-  "input[type=text],input[type=email],input[type=date],input[type=number],input[type=radio],input[type=checkbox]"
-);
+const inputs = document.querySelectorAll("input");
 // variable of inputs
-let firstName,
-  lastName,
-  email,
-  birthDate,
-  quantity,
-  location1,
-  location2,
-  location3,
-  location4,
-  location5,
-  location6,
-  cgv,
-  newsletter;
+let firstName, lastName, email, birthdate, quantity, locations, cgv, newsletter;
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // Launch modal ,form
@@ -48,46 +34,29 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 // give user input value to variable
+/*
 inputs.forEach((input) => {
   input.addEventListener("input", (e) => {
-    switch (e.target.id) {
+    switch (e.target.name) {
       case "first":
-        firstName = e.target.value;
+        firstNameChecker(e.target.value);
         break;
       case "last":
-        lastName = e.target.value;
+        lastNameChecker(e.target.value);
         break;
       case "email":
-        email = e.target.value;
+        emailChecker(e.target.value);
         break;
       case "birthdate":
-        birthDate = e.target.value;
+        birthdateChecker(e.target.value);
         break;
       case "quantity":
-        quantity = e.target.value;
+        quantityChecker(e.target.value);
         break;
-      case "location1":
-        location1 = e.target.value;
+      case "cgv":
+        cgvChecker(e.target.value);
         break;
-      case "location2":
-        location2 = e.target.value;
-        break;
-      case "location3":
-        location3 = e.target.value;
-        break;
-      case "location4":
-        location4 = e.target.value;
-        break;
-      case "location5":
-        location5 = e.target.value;
-        break;
-      case "location6":
-        location6 = e.target.value;
-        break;
-      case "checkbox1":
-        cgv = e.target.value;
-        break;
-      case "checkbox2":
+      case "newsletter":
         newsletter = e.target.value;
         break;
       default:
@@ -95,112 +64,141 @@ inputs.forEach((input) => {
     }
   });
 });
-// validations for all inputs
+*/
+const firstNameChecker = () => {
+  document
+    .querySelector("input[name = first]")
+    .addEventListener("input", (e) => {
+      firstName = e.target.value;
+      if (firstName.length < 2 || firstName.trim() === "") {
+        firstName = null;
+      } else {
+        firstName;
+      }
+    });
+};
+firstNameChecker();
+const lastNameChecker = () => {
+  document
+    .querySelector("input[name = last]")
+    .addEventListener("input", (e) => {
+      lastName = e.target.value;
+      if (
+        lastName.length < 2 ||
+        lastName === firstName ||
+        lastName.trim() === ""
+      ) {
+        lastName = null;
+      } else {
+        lastName;
+      }
+    });
+};
+lastNameChecker();
+const emailChecker = () => {
+  document
+    .querySelector("input[name = email]")
+    .addEventListener("input", (e) => {
+      email = e.target.value;
+      if (
+        !email.match(
+          /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/
+        )
+      ) {
+        email = null;
+      } else {
+        email;
+      }
+    });
+};
+emailChecker();
 
-function validate(validator) {
-  // check firstName
-  if (firstName.length < 2 || firstName.trim() === "") {
-    firstName = null;
+const birthdateChecker = () => {
+  const selectDate = document.querySelector("input[name = birthdate]");
+
+  selectDate.addEventListener("change", (e) => {
+    birthdate = e.target.value;
+    birthdate = birthdate.split("-").reverse().join("-");
+    if (
+      !birthdate.match(
+        /^([0]?[1-9]|[1|2][0-9]|[3][0|1])[.\/-]([0]?[1-9]|[1][0-2])[.\/-]([0-9]{4}|[0-9]{2})$/
+      )
+    ) {
+      birthdate = null;
+    } else {
+      birthdate;
+    }
+  });
+};
+
+birthdateChecker();
+
+const quantityChecker = () => {
+  document
+    .querySelector("input[name = quantity]")
+    .addEventListener("input", (e) => {
+      quantity = e.target.value;
+      if (!quantity.match(/^[0-9]+$/)) {
+        quantity = null;
+      } else {
+        quantity = parseInt(quantity);
+      }
+    });
+};
+
+quantityChecker();
+
+const locationsChecker = () => {
+  document.querySelectorAll('input[name = "location"]').forEach((radio) => {
+    radio.addEventListener("change", function (e) {
+      if (radio != null) {
+        locations = e.target.value;
+      } else {
+        locations = null;
+      }
+    });
+  });
+};
+locationsChecker();
+const cgvChecker = () => {
+  if (document.querySelector('input[name = "cgv"]:checked')) {
+    cgv = 1;
   } else {
-    firstName;
-    validator++;
-  }
-  //check lastName
-  if (lastName.length < 2 || lastName === firstName || lastName.trim() === "") {
-    lastName = null;
-  } else {
-    lastName;
-    validator++;
-  }
-  //check email
-  if (
-    !email.match(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/)
-  ) {
-    email = null;
-  } else {
-    email;
-    validator++;
-  }
-  //check birthDate
-  if (
-    !birthDate.match(
-      /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/
-    )
-  ) {
-    birthDate = null;
-  } else {
-    birthDate;
-    validator++;
-  }
-  //check quantity
-  if (!quantity.match(/^[0-9]+$/)) {
-    quantity = null;
-  } else {
-    quantity;
-    validator++;
-  }
-  //check location
-  if (
-    !location1.checked ||
-    !location2.checked ||
-    !location3.checked ||
-    !location4.checked ||
-    !location5.checked ||
-    !location6.checked
-  ) {
-    location1 = null;
-    location2 = null;
-    location3 = null;
-    location4 = null;
-    location5 = null;
-    location6 = null;
-  } else {
-    location1;
-    location2;
-    location3;
-    location4;
-    location5;
-    location6;
-    validator++;
-  }
-  //check cgv
-  if (!cgv.checked) {
     cgv = null;
-  } else {
-    cgv;
-    validator++;
   }
-  //check if every fields are ok
-  if (validator === 5) {
-    return true;
-  } else {
-    return false;
-  }
-}
-
-// final validation of form & saving data
+};
+cgvChecker();
+/*
+// validations for all inputs
+/**
+ * validation of form
+ * @param {Number} validator increment for test inputs
+ * @returns {Boolean} if the forms are valid or not
+ */
+/*
 let dataSaving;
-form.addEventListener("submit", (e) => {
-  validate();
-  if (validate()) {
+function validate(e) {
+  e.preventDefault();
+  if (
+    firstName &&
+    lastName &&
+    email &&
+    birthdate &&
+    quantity &&
+    locations &&
+    cgv
+  ) {
     dataSaving = {
       firstName,
       lastName,
       email,
-      birthDate,
+      locations,
+      birthdate,
       quantity,
-      location1,
-      location2,
-      location3,
-      location4,
-      location5,
-      location6,
-      cgv,
-      newsletter,
     };
-    form.innerHTML = `<h3>Merci pour votre inscription</h3> <button onclick='${closeModal()}'class='button'>Close</button>`;
+    form.innerHTML = `<h3>Merci pour votre inscription</h3> <button class='button'>Close</button>`;
   } else {
-    e.preventDefault();
+    alert("remplissez tous les champs!!!");
   }
-  return dataSaving;
-});
+}
+*/
