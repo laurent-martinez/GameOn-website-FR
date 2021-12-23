@@ -522,6 +522,10 @@ footer {
   }
 }
 
+.valid-form {
+  display: none;
+}
+
 @keyframes modalopen {
   from {
     opacity: 0;
