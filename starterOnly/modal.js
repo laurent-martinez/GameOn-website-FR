@@ -15,9 +15,13 @@ const modalbg = id("bground"),
   form = document.querySelector("form"),
   modalBtn = classes(".modal-btn"),
   formData = classes(".formData"),
-  closer = id("close"),
-  validForm = querySelector(".valid-form");
+  closer = id("close");
+//regex
 
+const regexEmail = /^([a-zA-Z0-9_-.]+)@([a-zA-Z0-9_-.]+).([a-zA-Z]{2,5})$/;
+const regexBirth =
+  /^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$/;
+const regexNumber = /^[0-9]+$/;
 // dom for all inputs
 const inputs = document.querySelectorAll("input");
 // variable of inputs
@@ -49,10 +53,10 @@ const getValue = () => {
           email = e.target.value;
           break;
         case "birthdate":
-          birthdate = e.target.value;
+          birthdate = e.target.value.split("-").reverse().join("-");
           break;
         case "quantity":
-          quantity = e.target.value;
+          quantity = parseInt(e.target.value);
           break;
         case "cgv":
           cgv = e.target.value;
@@ -68,62 +72,17 @@ const getValue = () => {
 };
 getValue();
 
-const errorDisplay = (tag, message, valid) => {
-  const container = document.querySelector("#" + tag);
-  const span = document.querySelector("#" + tag + " +span");
-  if (!valid) {
-    container.classList.add("error");
-    span.classList.add("error-message");
-    span.textContent = message;
-  } else {
-    container.classList.remove("error");
-    span.textContent = message;
-  }
-};
-
 const firstNameChecker = () =>
   document.querySelector("input[name = first]").value.trim().length > 2;
 
-const lastNameChecker = () => {
+const lastNameChecker = () =>
   document.querySelector("input[name = last]").value.trim().length > 2;
-};
 
-const emailChecker = () => {
-  document
-    .querySelector("input[name = email]")
-    .value.match(/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/);
-};
+const emailChecker = () => regexEmail.test(email);
 
-const birthdateChecker = () => {
-  const selectDate = document.querySelector("input[name = birthdate]");
+const birthdateChecker = () => regexBirth.test(birthdate);
 
-  selectDate.addEventListener("change", (e) => {
-    birthdate = birthdate.split("-").reverse().join("-");
-    if (
-      !birthdate.match(
-        /^([0]?[1-9]|[1|2][0-9]|[3][0|1])[.\/-]([0]?[1-9]|[1][0-2])[.\/-]([0-9]{4}|[0-9]{2})$/
-      )
-    ) {
-      return false;
-    } else {
-      return true;
-    }
-  });
-};
-
-const quantityChecker = () => {
-  document
-    .querySelector("input[name = quantity]")
-    .addEventListener("input", (e) => {
-      quantity = e.target.value;
-      if (!quantity.match(/^[0-9]+$/)) {
-        return false;
-      } else {
-        quantity = parseInt(quantity);
-        return true;
-      }
-    });
-};
+const quantityChecker = () => regexNumber.test(quantity);
 
 const locationsChecker = () => {
   document.querySelectorAll('input[name = "location"]').forEach((radio) => {
@@ -148,31 +107,29 @@ const cgvChecker = () =>
 let dataSaving;
 function validate(e) {
   e.preventDefault();
-  if (!firstName) {
-    errorDisplay("first", "Veuillez completer ce champ");
-  }
-  if (!lastName) {
-    errorDisplay("last", "Veuillez completer ce champ");
-  }
-  if (!email) {
-    errorDisplay("email", "Veuillez completer ce champ");
-  }
-  if (!quantity) {
-    errorDisplay("quantity", "Veuillez completer ce champ");
-  }
-  if (!birthdate) {
-    errorDisplay("birthdate", "Veuillez completer ce champ");
-  }
-
-  if (
-    firstNameChecker() &&
-    lastNameChecker() &&
-    emailChecker() &&
-    birthdateChecker() &&
-    quantityChecker() &&
-    locationsChecker() &&
-    cgvChecker()
-  ) {
+  if (!firstNameChecker()) {
+    formData.setAttribute("data-error-visible", "true");
+    formData.datast.error = "Prénom invalide";
+  } else if (!lastNameChecker()) {
+    formData.setAttribute("data-error-visible", "true");
+    formData.datast.error = "nom invalide";
+  } else if (!emailChecker()) {
+    formData.setAttribute("data-error-visible", "true");
+    formData.datast.error = "Email invalide";
+  } else if (!birthdateChecker()) {
+    formData.setAttribute("data-error-visible", "true");
+    formData.datast.error = "Date de naissance invalide";
+  } else if (!quantityChecker()) {
+    formData.setAttribute("data-error-visible", "true");
+    formData.datast.error = "Quantité invalide";
+  } else if (!locationsChecker()) {
+    formData.setAttribute("data-error-visible", "true");
+    formData.datast.error = "Location non sélectionné";
+  } else if (!cgvChecker()) {
+    formData.setAttribute("data-error-visible", "true");
+    formData.datast.error = "sélectionner le champ des Cgv";
+  } else {
+    formData.removeAttribute("data-error-visible");
     dataSaving = {
       firstName,
       lastName,

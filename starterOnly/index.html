@@ -63,7 +63,7 @@
               onsubmit="return validate();"
             >
               <div
-                class="formData">
+                class="formData" data-error="Prénom invalide">
                 <label for="first">Prénom</label><br>
                 <input
                   class="text-control"
@@ -75,7 +75,9 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData"
+                data-error="Nom invalide"
+                >
                 <label for="last">Nom</label><br>
                 <input
                   class="text-control"
@@ -85,10 +87,9 @@
                   minlength="2"
                   required
                 /><br>
-                <span data-error=""></span>
               </div>
               <div
-                class="formData">
+                class="formData" data-error="Email invalide">
                 <label for="email">E-mail</label><br>
                 <input
                   class="text-control"
@@ -99,7 +100,7 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData" data-error="Date non valide">
                 <label for="birthdate">Date de naissance</label><br>
                 <input
                   class="text-control"
@@ -110,7 +111,7 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData" data-error="Nombre non valide">
                 <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" required>
               </div>
@@ -186,7 +187,7 @@
               </div>
 
               <div
-                class="formData">
+                class="formData" data-error="Veuillez accepter les Cgv">
                 <input
                   class="checkbox-input"
                   type="checkbox"
@@ -212,6 +213,7 @@
                 value="C'est parti"
               />
             </form>
+         
           </div>
         </div>
       </div>
