@@ -18,10 +18,11 @@ const modalbg = id("bground"),
   closer = id("close");
 //regex
 
-const regexEmail = /^([a-zA-Z0-9_-.]+)@([a-zA-Z0-9_-.]+).([a-zA-Z]{2,5})$/;
+const regexEmail = /([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+).([a-zA-Z]{2,5})/;
 const regexBirth =
   /^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$/;
-const regexNumber = /^[0-9]+$/;
+const regexNumber = /^[1-9][0-9]?$/;
+
 // dom for all inputs
 const inputs = document.querySelectorAll("input");
 // variable of inputs
@@ -55,14 +56,17 @@ const getValue = () => {
         case "birthdate":
           birthdate = e.target.value.split("-").reverse().join("-");
           break;
+        case "location":
+          locations = e.target.value;
+          break;
         case "quantity":
           quantity = parseInt(e.target.value);
           break;
         case "cgv":
-          cgv = e.target.value;
+          cgv = e.value;
           break;
         case "newsletter":
-          newsletter = e.target.value;
+          newsletter = e.value;
           break;
         default:
           null;
@@ -84,15 +88,7 @@ const birthdateChecker = () => regexBirth.test(birthdate);
 
 const quantityChecker = () => regexNumber.test(quantity);
 
-const locationsChecker = () => {
-  document.querySelectorAll('input[name = "location"]').forEach((radio) => {
-    if (radio.checked) {
-      return true;
-    }
-  });
-  return false;
-};
-
+const locationsChecker = () => (locations === undefined ? false : true);
 const cgvChecker = () =>
   document.querySelector('input[name = "cgv"]:checked') !== null;
 
@@ -105,31 +101,55 @@ const cgvChecker = () =>
  */
 
 let dataSaving;
-function validate(e) {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
+  validate();
+});
+function validate() {
+  let hasError = false;
   if (!firstNameChecker()) {
-    formData.setAttribute("data-error-visible", "true");
-    formData.datast.error = "Prénom invalide";
-  } else if (!lastNameChecker()) {
-    formData.setAttribute("data-error-visible", "true");
-    formData.datast.error = "nom invalide";
-  } else if (!emailChecker()) {
-    formData.setAttribute("data-error-visible", "true");
-    formData.datast.error = "Email invalide";
-  } else if (!birthdateChecker()) {
-    formData.setAttribute("data-error-visible", "true");
-    formData.datast.error = "Date de naissance invalide";
-  } else if (!quantityChecker()) {
-    formData.setAttribute("data-error-visible", "true");
-    formData.datast.error = "Quantité invalide";
-  } else if (!locationsChecker()) {
-    formData.setAttribute("data-error-visible", "true");
-    formData.datast.error = "Location non sélectionné";
-  } else if (!cgvChecker()) {
-    formData.setAttribute("data-error-visible", "true");
-    formData.datast.error = "sélectionner le champ des Cgv";
+    formData[0].setAttribute("data-error-visible", "true");
+    hasError = true;
   } else {
-    formData.removeAttribute("data-error-visible");
+    formData[0].setAttribute("data-error-visible", "false");
+  }
+  if (!lastNameChecker()) {
+    formData[1].setAttribute("data-error-visible", "true");
+    hasError = true;
+  } else {
+    formData[1].setAttribute("data-error-visible", "false");
+  }
+  if (!emailChecker()) {
+    formData[2].setAttribute("data-error-visible", "true");
+    hasError = true;
+  } else {
+    formData[2].setAttribute("data-error-visible", "false");
+  }
+  if (!birthdateChecker()) {
+    formData[3].setAttribute("data-error-visible", "true");
+    hasError = true;
+  } else {
+    formData[3].setAttribute("data-error-visible", "false");
+  }
+  if (!quantityChecker()) {
+    formData[4].setAttribute("data-error-visible", "true");
+    hasError = true;
+  } else {
+    formData[4].setAttribute("data-error-visible", "false");
+  }
+  if (!locationsChecker()) {
+    formData[5].setAttribute("data-error-visible", "true");
+    hasError = true;
+  } else {
+    formData[5].setAttribute("data-error-visible", "false");
+  }
+  if (!cgvChecker()) {
+    formData[6].setAttribute("data-error-visible", "true");
+    hasError = true;
+  } else {
+    formData[6].setAttribute("data-error-visible", "false");
+  }
+  if (!hasError) {
     dataSaving = {
       firstName,
       lastName,
