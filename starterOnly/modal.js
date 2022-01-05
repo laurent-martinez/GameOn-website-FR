@@ -15,7 +15,10 @@ const modalbg = id("bground"),
   form = document.querySelector("form"),
   modalBtn = classes(".modal-btn"),
   formData = classes(".formData"),
-  closer = id("close");
+  formDataCgv = document.querySelector(".formData-cgv"),
+  closer = id("close"),
+  validForm = document.querySelector(".valid-form"),
+  closeValidForm = id("close-valid-form");
 //regex
 
 const regexEmail = /([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+).([a-zA-Z]{2,5})/;
@@ -35,6 +38,7 @@ function launchModal() {
 }
 // Close modal event
 closer.addEventListener("click", closeModal);
+closeValidForm.addEventListener("click", closeModal);
 // Close modal form
 function closeModal() {
   modalbg.style.display = "none";
@@ -144,10 +148,10 @@ function validate() {
     formData[5].setAttribute("data-error-visible", "false");
   }
   if (!cgvChecker()) {
-    formData[6].setAttribute("data-error-visible", "true");
+    formDataCgv.setAttribute("data-error-visible", "true");
     hasError = true;
   } else {
-    formData[6].setAttribute("data-error-visible", "false");
+    formDataCgv.setAttribute("data-error-visible", "false");
   }
   if (!hasError) {
     dataSaving = {
@@ -158,7 +162,8 @@ function validate() {
       birthdate,
       quantity,
     };
-    validForm.style.display = "block";
-    modalbg.style.display = "none";
+    form.reset();
+    form.style.display = "none";
+    validForm.style.display = "flex";
   }
 }

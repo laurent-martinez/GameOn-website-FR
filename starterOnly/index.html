@@ -18,8 +18,8 @@
     </div>
     <div class="main-navbar">
       
-      <a href="#" class="active"><span>Accueil</span></a>
-      <a href="#"><span>Détails de l'évènement</span></a>
+
+      <a href="#" class="active"><span>Détails de l'évènement</span></a>
       <a href="#"><span>À propos</span></a>
       <a href="#"><span>Contact</span></a>
       <a href="#"><span>Évènements passés</span></a>
@@ -88,7 +88,7 @@
                 /><br>
               </div>
               <div
-                class="formData">
+                class="formData" data-error="Format incorrect">
                 <label for="email">E-mail</label><br>
                 <input
                   class="text-control"
@@ -147,7 +147,6 @@
                   id="location3"
                   name="location"
                   value="Seattle"
-                  data-error="ffgggg"
                 />
                 <label class="checkbox-label" for="location3">
                   <span class="checkbox-icon"></span>
@@ -189,19 +188,21 @@
               </div>
 
               <div
-                class="formData" data-error="Vous devez vérifier que vous acceptez les termes et conditions.">
+                class="formData-cgv" id="cgv" data-error="Vous devez vérifier que vous acceptez les termes et conditions.">
                 <input
                   class="checkbox-input"
                   type="checkbox"
                   id="checkbox1"
                   name = "cgv"
                 />
-                <label class="checkbox2-label" for="checkbox1">
+                <label class="checkbox2-label" for="checkbox1" >
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
                 <br>
-                <input class="checkbox-input" type="checkbox" id="checkbox2" name = "newsletter" />
+                </div>
+                <div id="checkbox2">
+                <input class="checkbox-input" type="checkbox"  name = "newsletter" />
                 <label class="checkbox2-label" for="checkbox2">
                   <span class="checkbox-icon"></span>
                   Je souhaite être prévenu des prochains évènements.
@@ -214,9 +215,12 @@
                 value="C'est parti"
               />
             </form>
-            <div id="valid-form">
-              <h3></h3>
-              <input type="text">
+            <div class="valid-form">
+              <h3>Merci pour <br>votre inscription</h3>
+              <input  class="button"
+              id="close-valid-form"
+              type="submit"
+              value="Fermer"  >
             </div>
           </div>
         </div>
