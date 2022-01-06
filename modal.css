@@ -30,7 +30,6 @@ img {
 .topnav {
   overflow: hidden;
   margin: 3.5%;
-  z-index: 5;
 }
 .header-logo {
   float: left;
@@ -139,7 +138,8 @@ main {
   margin: 5% auto;
   width: 100%;
   max-width: 500px;
-  animation: modalopen 0.8s modalclose 0.8s;
+  animation: modalopen var(--modal-duration) ease-in;
+  animation: modalclose ease-out;
   background: #232323;
   border-radius: 10px;
   overflow: hidden;
@@ -194,6 +194,7 @@ input {
   display: block;
   margin-left: 3px;
   text-align: left;
+  margin-bottom: 2px;
   line-height: 0.3;
   opacity: 0;
   transition: 0.3s;
@@ -210,7 +211,7 @@ input {
 .formData[data-error-visible="false"] .text-control {
   border: 2px solid #42b334;
 }
-#checkbox2 {
+#newsletter {
   margin-bottom: 10px;
 }
 /*
@@ -583,12 +584,27 @@ footer {
     margin: 0;
     padding: 5px;
   }
+  .hero-img {
+    padding: 0 10px;
+  }
   .hero-headline {
     font-size: 2.5rem;
     white-space: normal;
     width: 100%;
   }
 }
+
+@media screen and (max-width: 400px) {
+  .formData[data-error]::after {
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .formData-cgv[data-error]::after {
+    line-height: 1.2;
+    margin-bottom: 5px;
+  }
+}
+
 @media screen and (max-width: 350px) {
   .hero-headline {
     font-size: 2rem;

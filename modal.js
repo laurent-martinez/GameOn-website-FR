@@ -7,7 +7,7 @@ function editNav() {
   }
 }
 
-// DOM Elements----------------------------------------//
+// DOM Elements------------------------------------------------------------------------------------------------//
 let id = (id) => document.getElementById(id);
 let classes = (classes) => document.querySelectorAll(classes);
 
@@ -19,21 +19,32 @@ const modalbg = id("bground"),
   closer = id("close"),
   validForm = document.querySelector(".valid-form"),
   closeValidForm = id("close-valid-form");
-//regex
-
-const regexEmail = /([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+).([a-zA-Z]{2,5})/;
-const regexBirth =
-  /^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$/;
-const regexNumber = /^[1-9][0-9]?$/;
 
 // dom for all inputs
 const inputs = document.querySelectorAll("input");
+
+// variable & regex-------------------------------------------------------------------------------------------//
+
+//regex
+const regexEmail = /([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+).([a-zA-Z]{2,5})/;
+const regexBirth =
+  /^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$/;
+const regexNumber = /^([0-9]|[1-9][0-9]|)$/;
+
 // variable of inputs
 let firstName, lastName, email, birthdate, quantity, locations, cgv, newsletter;
+
+//launch & close modal--------------------------------------------------------------------------------------//
+
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-// Launch modal ,form
+// Launch modal form
 function launchModal() {
+  form.reset();
+  formData.forEach((f) => f.setAttribute("data-error-visible", "unset"));
+  [email, birthdate, quantity, locations] = [null, null, null, undefined];
+  validForm.style.display = "none";
+  form.style.display = "block";
   modalbg.style.display = "block";
 }
 // Close modal event
@@ -43,7 +54,10 @@ closeValidForm.addEventListener("click", closeModal);
 function closeModal() {
   modalbg.style.display = "none";
 }
-// give user input value to variable
+
+// check modal values--------------------------------------------------------------------------------------//
+
+// function to give users inputs values to variables
 const getValue = () => {
   inputs.forEach((input) => {
     input.addEventListener("input", (e) => {
@@ -78,13 +92,17 @@ const getValue = () => {
     });
   });
 };
+
+// call getValue function
 getValue();
 
+// check if users inputs are correct
+
 const firstNameChecker = () =>
-  document.querySelector("input[name = first]").value.trim().length > 2;
+  document.querySelector("input[name = first]").value.trim().length >= 2;
 
 const lastNameChecker = () =>
-  document.querySelector("input[name = last]").value.trim().length > 2;
+  document.querySelector("input[name = last]").value.trim().length >= 2;
 
 const emailChecker = () => regexEmail.test(email);
 
@@ -96,19 +114,19 @@ const locationsChecker = () => (locations === undefined ? false : true);
 const cgvChecker = () =>
   document.querySelector('input[name = "cgv"]:checked') !== null;
 
-/*
-// validations for all inputs
-/**
- * validation of form
- * @param {Number} validator increment for test inputs
- * @returns {Boolean} if the forms are valid or not
- */
+// final check & send the form----------------------------------------------------------------------------//
 
-let dataSaving;
+// listen the event submit & avoid the form to be send before the final check
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   validate();
 });
+
+// create an object to save all users inputs values
+let dataSaving = {};
+
+// main function who check all validators, send error messages, save data, send form & show greetings
+
 function validate() {
   let hasError = false;
   if (!firstNameChecker()) {
@@ -153,6 +171,7 @@ function validate() {
   } else {
     formDataCgv.setAttribute("data-error-visible", "false");
   }
+
   if (!hasError) {
     dataSaving = {
       firstName,
@@ -162,7 +181,6 @@ function validate() {
       birthdate,
       quantity,
     };
-    form.reset();
     form.style.display = "none";
     validForm.style.display = "flex";
   }
