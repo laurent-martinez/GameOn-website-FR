@@ -497,8 +497,29 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
-
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1150px) {
+  .topnav {
+    display: flex;
+    flex-direction: column;
+  }
+  .main-navbar {
+    display: flex;
+    justify-content: center;
+  }
+  .hero-headline {
+    font-size: 75px;
+  }
+}
+@media screen and (max-width: 942px) {
+  .topnav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .main-navbar {
+    display: block;
+  }
   .topnav.responsive {
     position: relative;
   }
@@ -520,21 +541,22 @@ footer {
     float: right;
     display: block;
   }
+  .topnav .active a.icon {
+    color: black;
+  }
   .header-logo {
     margin-left: 10px;
   }
-  .topnav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+
   img {
     height: 25px;
     width: auto;
   }
-  .topnav .icon {
-    color: red;
+
+  .topnav.responsive .icon:hover {
+    color: white;
   }
+
   main {
     margin: 0 20px;
   }
