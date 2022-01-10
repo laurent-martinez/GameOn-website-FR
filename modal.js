@@ -127,11 +127,15 @@ let dataSaving = {};
 // main function who check all validators, send error messages, save data, send form & show greetings
 
 function validate() {
+  // boolean on false by default
   let hasError = false;
+  // verify the checkers
   if (!firstNameChecker()) {
+    // & give error message if user's input is wrong
     formData[0].setAttribute("data-error-visible", "true");
     hasError = true;
   } else {
+    // or green border if user's input is correct
     formData[0].setAttribute("data-error-visible", "false");
   }
   if (!lastNameChecker()) {
@@ -170,7 +174,7 @@ function validate() {
   } else {
     formDataCgv.setAttribute("data-error-visible", "false");
   }
-
+  // if all the checkers are valid then save user's input in this object
   if (!hasError) {
     dataSaving = {
       firstName,
@@ -180,6 +184,7 @@ function validate() {
       birthdate,
       quantity,
     };
+    // then close the form and open the greetings
     form.style.display = "none";
     validForm.style.display = "flex";
   }
