@@ -27,8 +27,7 @@ const inputs = document.querySelectorAll("input");
 
 //regex
 const regexEmail = /([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+).([a-zA-Z]{2,5})/;
-const regexBirth =
-  /^([0]?[1-9]|[1|2][0-9]|[3][0|1])[./-]([0]?[1-9]|[1][0-2])[./-]([0-9]{4}|[0-9]{2})$/;
+const regexBirth = /^\d{4}-\d{2}-\d{2}$/;
 const regexNumber = /^([0-9]|[1-9][0-9]|)$/;
 
 // variable of inputs
@@ -42,7 +41,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 function launchModal() {
   form.reset();
   formData.forEach((f) => f.setAttribute("data-error-visible", "unset"));
-  [email, birthdate, quantity, locations] = [null, null, null, undefined];
+  [email, birthdate, quantity, locations] = [null, null, undefined];
   validForm.style.display = "none";
   form.style.display = "block";
   modalbg.style.display = "block";
@@ -72,7 +71,7 @@ const getValue = () => {
           email = e.target.value;
           break;
         case "birthdate":
-          birthdate = e.target.value.split("-").reverse().join("-");
+          birthdate = e.target.value;
           break;
         case "location":
           locations = e.target.value;

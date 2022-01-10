@@ -57,7 +57,7 @@
             <form name="reserve" action="index.html" method="get">
               <div
                 class="formData"
-                data-error="Veuillez entrer 2 caractères ou plus pour le champ du prénom"
+                data-error="Veuillez entrer au moins 2 caractères"
               >
                 <label for="first">Prénom</label><br />
                 <input
@@ -65,13 +65,12 @@
                   type="text"
                   id="first"
                   name="first"
-                  minlength="2"
-                  required
+              
                 /><br />
               </div>
               <div
                 class="formData"
-                data-error="Veuillez entrer 2 caractères ou plus pour le champ du nom"
+                data-error="Veuillez entrer au moins 2 caractères"
               >
                 <label for="last">Nom</label><br />
                 <input
@@ -79,8 +78,7 @@
                   type="text"
                   id="last"
                   name="last"
-                  minlength="2"
-                  required
+           
                 /><br />
               </div>
               <div class="formData" data-error="Format incorrect">
@@ -90,7 +88,7 @@
                   type="email"
                   id="email"
                   name="email"
-                  required
+                
                 /><br />
               </div>
               <div
@@ -103,11 +101,12 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                  required
+              
                 /><br />
               </div>
               <div class="formData" data-error="Vous devez saisir un nombre">
-                <label for="quantity"
+              
+                <label for="quantity" class="quantity-question"
                   >À combien de tournois GameOn avez-vous déjà participé
                   ?</label
                 ><br />
@@ -116,12 +115,10 @@
                   class="text-control"
                   id="quantity"
                   name="quantity"
-                  min="0"
-                  max="99"
-                  required
+             
                 />
               </div>
-              <p class="text-label">Quelles villes ?</p>
+              <p class="text-label">À quel tournoi souhaitez-vous participer cette année ?</p>
               <div class="formData" data-error="Vous devez choisir une option.">
                 <input
                   class="checkbox-input"

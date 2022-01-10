@@ -164,6 +164,12 @@ input {
   border: 0.8px solid #ccc;
   outline: none;
 }
+.quantity-question {
+  margin-top: 5px;
+}
+.formData[data-error]::after {
+  margin-bottom: 5px;
+}
 .text-control {
   margin: 0;
   padding: 8px;
