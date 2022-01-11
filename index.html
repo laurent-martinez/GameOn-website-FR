@@ -56,7 +56,7 @@
             <form name="reserve" action="index.html" method="get">
               <div
                 class="formData"
-                data-error="Veuillez entrer au moins 2 caractères"
+                data-error="Veuillez entrer au moins deux caractères"
               >
                 <label for="first">Prénom</label><br />
                 <input
@@ -64,11 +64,12 @@
                   type="text"
                   id="first"
                   name="first"
+                  maxlength="15"
                 /><br />
               </div>
               <div
                 class="formData"
-                data-error="Veuillez entrer au moins 2 caractères"
+                data-error="Veuillez entrer au moins deux caractères"
               >
                 <label for="last">Nom</label><br />
                 <input
@@ -76,9 +77,10 @@
                   type="text"
                   id="last"
                   name="last"
+                  maxlength="15"
                 /><br />
               </div>
-              <div class="formData" data-error="Format incorrect">
+              <div class="formData" data-error="Format d'email incorrect">
                 <label for="email">E-mail</label><br />
                 <input
                   class="text-control"
@@ -97,9 +99,11 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
+                  min="1905-01-09"
+                  max="2007-01-09"
                 /><br />
               </div>
-              <div class="formData" data-error="Vous devez saisir un nombre">
+              <div class="formData" data-error="Vous devez saisir un nombre entre 0 et 99">
               
                 <label for="quantity" class="quantity-question"
                   >À combien de tournois GameOn avez-vous déjà participé

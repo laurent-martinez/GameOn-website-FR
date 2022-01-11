@@ -27,7 +27,7 @@ const inputs = document.querySelectorAll("input");
 
 //regex
 const regexEmail = /([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+).([a-zA-Z]{2,5})/;
-const regexBirth = /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/;
+const regexBirth = /\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/;
 const regexNumber = /^([0-9]|[1-9][0-9]|)$/;
 
 // variable of inputs
