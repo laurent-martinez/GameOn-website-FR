@@ -67,7 +67,7 @@ img {
 
 .topnav .icon {
   display: none;
-  background-color: #ff0000;
+  color: #ff0000;
   z-index: 6;
   border-radius: 15px;
 }
@@ -542,6 +542,9 @@ footer {
     position: absolute;
     right: 0;
     top: 0;
+    color: #ffffff;
+    background-color: #ff0000;
+    z-index: 7;
   }
   .topnav.responsive a {
     float: none;
@@ -552,6 +555,7 @@ footer {
   .topnav a {
     display: none;
   }
+
   .topnav a.icon {
     float: right;
     display: block;

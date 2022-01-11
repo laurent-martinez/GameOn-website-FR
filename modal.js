@@ -95,7 +95,7 @@ const getValue = () => {
 // call getValue function
 getValue();
 
-// check if users inputs are correct
+// check if users inputs are correct (checkers)
 
 const firstNameChecker = () =>
   document.querySelector("input[name = first]").value.trim().length >= 2;
