@@ -64,6 +64,7 @@
                   type="text"
                   id="first"
                   name="first"
+                  pattern="^[A-Za-z-]+$"
                   maxlength="15"
                 /><br />
               </div>
@@ -77,6 +78,7 @@
                   type="text"
                   id="last"
                   name="last"
+                  pattern="^[A-Za-z-]+$"
                   maxlength="15"
                 /><br />
               </div>
@@ -99,8 +101,7 @@
                   type="date"
                   id="birthdate"
                   name="birthdate"
-                  min="1905-01-09"
-                  max="2007-01-09"
+                  min="1905-01-01"
                 /><br />
               </div>
               <div class="formData" data-error="Vous devez saisir un nombre entre 0 et 99">
