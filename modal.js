@@ -41,7 +41,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 function launchModal() {
   form.reset();
   formData.forEach((f) => f.setAttribute("data-error-visible", "unset"));
-  [email, birthdate, quantity, locations] = [null, null, undefined];
+  [email, birthdate, quantity, locations] = [null, null, null, undefined];
   validForm.style.display = "none";
   form.style.display = "block";
   modalbg.style.display = "block";
